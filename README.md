@@ -5,11 +5,8 @@
 ### **If you like the work, find it useful and if you would like to get me a :coffee: :smile:** [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7GH3YDCHZ36QN)  
 
 *******************************************************************************************************************************
-## GassistPi for OSMC users with all functionalities of GassistPi master branch  
+### GassistPi for OSMC users with all functionalities of GassistPi master branch  
 
-*******************************************************************************************************************************  
-**CLI or Raspbian Lite does not support all features and Custom wakeword does not work with Google's AIY image. So please use the Standard Raspbian Desktop image- Link https://www.raspberrypi.org/downloads/raspbian/**  
-*******************************************************************************************************************************
 
 *************************************************
 ## **FIRST STEP- CLONE the PROJECT on to Pi**   
