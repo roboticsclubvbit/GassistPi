@@ -145,7 +145,7 @@ def YouTube_No_Autoplay(phrase):
     say("Playing " + track)
     playshell.stdin.write(bytes('/' + track + '\n1\n','utf-8'))
     playshell.stdin.flush()
-    
+
 
 def stop():
     pkill = subprocess.Popen(["/usr/bin/pkill","mpsyt"],stdin=subprocess.PIPE)
@@ -635,7 +635,7 @@ def kodiactions(phrase):
     elif 'set'.lower() in str(phrase).lower() and 'volume'.lower() in str(phrase).lower():
         for s in re.findall(r'\b\d+\b', phrase):
             kodi.Application.SetVolume({"volume": int(s)})
-            with open('/home/pi/.volume.json', 'w') as f:
+            with open('/home/osmc/.volume.json', 'w') as f:
                    json.dump(int(s), f)
     elif 'toggle mute'.lower() in str(phrase).lower():
         status=mutevolstatus()
@@ -703,7 +703,7 @@ def fetchautoplaylist(url,numvideos):
     autonum=numvideos
     autoplay_urls=[]
     autoplay_urls.append(videourl)
-    for i in range(0,autonum):        
+    for i in range(0,autonum):
         response=urllib.request.urlopen(videourl)
         webContent = response.read()
         webContent = webContent.decode('utf-8')
@@ -739,7 +739,7 @@ def YouTube_Autoplay(phrase):
     say("Adding autoplay links to the playlist")
     for i in range(0,len(autourls)):
         os.system('mpsyt url '+autourls[i]+', add 1 mylist, exit')
-    
+
     print("Playing: " + track)
     say("Playing " + track)
     global playshell
@@ -748,10 +748,10 @@ def YouTube_Autoplay(phrase):
     else:
         print("Error")
 
-    
-                   
 
-    
+
+
+
 
 
 #GPIO Device Control

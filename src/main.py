@@ -88,11 +88,11 @@ def process_event(event, device_id):
         event(event.Event): The current event to process.
     """
     if event.type == EventType.ON_CONVERSATION_TURN_STARTED:
-        subprocess.Popen(["aplay", "/home/pi/GassistPi/sample-audio-files/Fb.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.Popen(["aplay", "/home/osmc/GassistPi/sample-audio-files/Fb.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         #Uncomment the following after starting the Kodi
         #status=mutevolstatus()
         #vollevel=status[1]
-        #with open('/home/pi/.volume.json', 'w') as f:
+        #with open('/home/osmc/.volume.json', 'w') as f:
                #json.dump(vollevel, f)
         #kodi.Application.SetVolume({"volume": 0})
         GPIO.output(5,GPIO.HIGH)
@@ -117,7 +117,7 @@ def process_event(event, device_id):
         GPIO.output(5,GPIO.LOW)
         led.ChangeDutyCycle(0)
         #Uncomment the following after starting the Kodi
-        #with open('/home/pi/.volume.json', 'r') as f:
+        #with open('/home/osmc/.volume.json', 'r') as f:
                #vollevel = json.load(f)
                #kodi.Application.SetVolume({"volume": vollevel})
         print()
@@ -179,7 +179,7 @@ def main():
         credentials = google.oauth2.credentials.Credentials(token=None,
                                                             **json.load(f))
     with Assistant(credentials, args.device_model_id) as assistant:
-        subprocess.Popen(["aplay", "/home/pi/GassistPi/sample-audio-files/Startup.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.Popen(["aplay", "/home/osmc/GassistPi/sample-audio-files/Startup.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         events = assistant.start()
         print('device_model_id:', args.device_model_id + '\n' +
               'device_id:', assistant.device_id + '\n')
@@ -219,25 +219,25 @@ def main():
             if 'google music'.lower() in str(usrcmd).lower():
                 assistant.stop_conversation()
                 os.system('pkill mpv')
-                if os.path.isfile("/home/pi/GassistPi/src/trackchange.py"):
-                    os.system('rm /home/pi/GassistPi/src/trackchange.py')
-                    os.system('echo "from gmusic import play_playlist\nfrom gmusic import play_songs\nfrom gmusic import play_album\nfrom gmusic import play_artist\n\n" >> /home/pi/GassistPi/src/trackchange.py')
+                if os.path.isfile("/home/osmc/GassistPi/src/trackchange.py"):
+                    os.system('rm /home/osmc/GassistPi/src/trackchange.py')
+                    os.system('echo "from gmusic import play_playlist\nfrom gmusic import play_songs\nfrom gmusic import play_album\nfrom gmusic import play_artist\n\n" >> /home/osmc/GassistPi/src/trackchange.py')
                     if 'all the songs'.lower() in str(usrcmd).lower():
-                        os.system('echo "play_songs()\n" >> /home/pi/GassistPi/src/trackchange.py')
+                        os.system('echo "play_songs()\n" >> /home/osmc/GassistPi/src/trackchange.py')
                         say("Playing all your songs")
                         play_songs()
 
                     if 'playlist'.lower() in str(usrcmd).lower():
                         if 'first'.lower() in str(usrcmd).lower() or 'one'.lower() in str(usrcmd).lower()  or '1'.lower() in str(usrcmd).lower():
-                            os.system('echo "play_playlist(0)\n" >> /home/pi/GassistPi/src/trackchange.py')
+                            os.system('echo "play_playlist(0)\n" >> /home/osmc/GassistPi/src/trackchange.py')
                             say("Playing songs from your playlist")
                             play_playlist(0)
                         else:
                             say("Sorry I am unable to help")
 
                     if 'album'.lower() in str(usrcmd).lower():
-                        if os.path.isfile("/home/pi/.gmusicalbumplayer.json"):
-                            os.system("rm /home/pi/.gmusicalbumplayer.json")
+                        if os.path.isfile("/home/osmc/.gmusicalbumplayer.json"):
+                            os.system("rm /home/osmc/.gmusicalbumplayer.json")
 
                         req=str(usrcmd).lower()
                         idx=(req).find('album')
@@ -253,15 +253,15 @@ def main():
                         album=album.strip()
                         print(album)
                         albumstr=('"'+album+'"')
-                        f = open('/home/pi/GassistPi/src/trackchange.py', 'a+')
+                        f = open('/home/osmc/GassistPi/src/trackchange.py', 'a+')
                         f.write('play_album('+albumstr+')')
                         f.close()
                         say("Looking for songs from the album")
                         play_album(album)
 
                     if 'artist'.lower() in str(usrcmd).lower():
-                        if os.path.isfile("/home/pi/.gmusicartistplayer.json"):
-                            os.system("rm /home/pi/.gmusicartistplayer.json")
+                        if os.path.isfile("/home/osmc/.gmusicartistplayer.json"):
+                            os.system("rm /home/osmc/.gmusicartistplayer.json")
 
                         req=str(usrcmd).lower()
                         idx=(req).find('artist')
@@ -277,29 +277,29 @@ def main():
                         artist=artist.strip()
                         print(artist)
                         artiststr=('"'+artist+'"')
-                        f = open('/home/pi/GassistPi/src/trackchange.py', 'a+')
+                        f = open('/home/osmc/GassistPi/src/trackchange.py', 'a+')
                         f.write('play_artist('+artiststr+')')
                         f.close()
                         say("Looking for songs rendered by the artist")
                         play_artist(artist)
                 else:
-                    os.system('echo "from gmusic import play_playlist\nfrom gmusic import play_songs\nfrom gmusic import play_album\nfrom gmusic import play_artist\n\n" >> /home/pi/GassistPi/src/trackchange.py')
+                    os.system('echo "from gmusic import play_playlist\nfrom gmusic import play_songs\nfrom gmusic import play_album\nfrom gmusic import play_artist\n\n" >> /home/osmc/GassistPi/src/trackchange.py')
                     if 'all the songs'.lower() in str(usrcmd).lower():
-                        os.system('echo "play_songs()\n" >> /home/pi/GassistPi/src/trackchange.py')
+                        os.system('echo "play_songs()\n" >> /home/osmc/GassistPi/src/trackchange.py')
                         say("Playing all your songs")
                         play_songs()
 
                     if 'playlist'.lower() in str(usrcmd).lower():
                         if 'first'.lower() in str(usrcmd).lower() or 'one'.lower() in str(usrcmd).lower()  or '1'.lower() in str(usrcmd).lower():
-                            os.system('echo "play_playlist(0)\n" >> /home/pi/GassistPi/src/trackchange.py')
+                            os.system('echo "play_playlist(0)\n" >> /home/osmc/GassistPi/src/trackchange.py')
                             say("Playing songs from your playlist")
                             play_playlist(0)
                         else:
                             say("Sorry I am unable to help")
 
                     if 'album'.lower() in str(usrcmd).lower():
-                        if os.path.isfile("/home/pi/.gmusicalbumplayer.json"):
-                            os.system("rm /home/pi/.gmusicalbumplayer.json")
+                        if os.path.isfile("/home/osmc/.gmusicalbumplayer.json"):
+                            os.system("rm /home/osmc/.gmusicalbumplayer.json")
 
                         req=str(usrcmd).lower()
                         idx=(req).find('album')
@@ -315,15 +315,15 @@ def main():
                         album=album.strip()
                         print(album)
                         albumstr=('"'+album+'"')
-                        f = open('/home/pi/GassistPi/src/trackchange.py', 'a+')
+                        f = open('/home/osmc/GassistPi/src/trackchange.py', 'a+')
                         f.write('play_album('+albumstr+')')
                         f.close()
                         say("Looking for songs from the album")
                         play_album(album)
 
                     if 'artist'.lower() in str(usrcmd).lower():
-                        if os.path.isfile("/home/pi/.gmusicartistplayer.json"):
-                            os.system("rm /home/pi/.gmusicartistplayer.json")
+                        if os.path.isfile("/home/osmc/.gmusicartistplayer.json"):
+                            os.system("rm /home/osmc/.gmusicartistplayer.json")
 
                         req=str(usrcmd).lower()
                         idx=(req).find('artist')
@@ -339,7 +339,7 @@ def main():
                         artist=artist.strip()
                         print(artist)
                         artiststr=('"'+artist+'"')
-                        f = open('/home/pi/GassistPi/src/trackchange.py', 'a+')
+                        f = open('/home/osmc/GassistPi/src/trackchange.py', 'a+')
                         f.write('play_artist('+artiststr+')')
                         f.close()
                         say("Looking for songs rendered by the artist")

@@ -33,13 +33,13 @@ read -r -p "Enter a product name for your device: " prodname
 echo ""
 
 modelid=$projid-$(date +%Y%m%d%H%M%S )
-echo "Your Model-Id used for the project is: $modelid" >> /home/pi/modelid.txt
-cd /home/pi/
+echo "Your Model-Id used for the project is: $modelid" >> /home/osmc/modelid.txt
+cd /home/osmc/
 #--------------GassistPi Deps----------------------------------------------------
 sudo apt-get install libxml2-dev libxslt-dev python-dev -y
 sudo apt-get install mpv -y
-mkdir -p /home/pi/.config/mpv/scripts/
-mv /home/pi/GassistPi/src/end.lua /home/pi/.config/mpv/scripts/end.lua
+mkdir -p /home/osmc/.config/mpv/scripts/
+mv /home/osmc/GassistPi/src/end.lua /home/osmc/.config/mpv/scripts/end.lua
 sudo apt-get install mplayer -y
 sudo pip3 install mps-youtube youtube-dl
 sudo apt-get install vlc -y
@@ -71,7 +71,7 @@ python -m pip install --upgrade google-assistant-library
 python -m pip install --upgrade google-assistant-sdk
 python -m pip install --upgrade google-assistant-sdk[samples]
 python -m pip install --upgrade google-auth google-auth-oauthlib google-auth-httplib2
-google-oauthlib-tool --client-secrets /home/pi/$credname --scope https://www.googleapis.com/auth/assistant-sdk-prototype --save --headless
+google-oauthlib-tool --client-secrets /home/osmc/$credname --scope https://www.googleapis.com/auth/assistant-sdk-prototype --save --headless
 googlesamples-assistant-devicetool register-model --manufacturer "Pi Foundation" \
           --product-name $prodname --type LIGHT --model $modelid
 echo "Testing the installed google assistant. Make a note of the generated Device-Id"

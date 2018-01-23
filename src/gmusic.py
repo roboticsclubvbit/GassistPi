@@ -16,13 +16,13 @@ logged_in = api.login('ENTER_YOUR_EMAIL_HERE', 'ENETER_YOUR_PASSWORD', Mobilecli
 
 def loadsonglist():
     song_ids=[]
-    if os.path.isfile("/home/pi/songs.json"):
-        with open('/home/pi/songs.json','r') as input_file:
+    if os.path.isfile("/home/osmc/songs.json"):
+        with open('/home/osmc/songs.json','r') as input_file:
             songs_list= json.load(input_file)
 ##            print(songs_list)
     else:
         songs_list= api.get_all_songs()
-        with open('/home/pi/songs.json', 'w') as output_file:
+        with open('/home/osmc/songs.json', 'w') as output_file:
             json.dump(songs_list, output_file)
     for i in range(0,len(songs_list)):
         song_ids.append(songs_list[i]['id'])
@@ -32,13 +32,13 @@ def loadsonglist():
 def loadartist(artistname):
     song_ids=[]
     artist=str(artistname)
-    if os.path.isfile("/home/pi/songs.json"):
-        with open('/home/pi/songs.json','r') as input_file:
+    if os.path.isfile("/home/osmc/songs.json"):
+        with open('/home/osmc/songs.json','r') as input_file:
             songs_list= json.load(input_file)
 ##            print(songs_list)
     else:
         songs_list= api.get_all_songs()
-        with open('/home/pi/songs.json', 'w') as output_file:
+        with open('/home/osmc/songs.json', 'w') as output_file:
             json.dump(songs_list, output_file)
     for i in range(0,len(songs_list)):
         if artist.lower() in (songs_list[i]['albumArtist']).lower():
@@ -51,13 +51,13 @@ def loadartist(artistname):
 def loadalbum(albumname):
     song_ids=[]
     album=str(albumname)
-    if os.path.isfile("/home/pi/songs.json"):
-        with open('/home/pi/songs.json','r') as input_file:
+    if os.path.isfile("/home/osmc/songs.json"):
+        with open('/home/osmc/songs.json','r') as input_file:
             songs_list= json.load(input_file)
 ##            print(songs_list)
     else:
         songs_list= api.get_all_songs()
-        with open('/home/pi/songs.json', 'w') as output_file:
+        with open('/home/osmc/songs.json', 'w') as output_file:
             json.dump(songs_list, output_file)
     for i in range(0,len(songs_list)):
         if album.lower() in (songs_list[i]['album']).lower():
@@ -69,12 +69,12 @@ def loadalbum(albumname):
 
 def loadplaylist(playlistnum):
     track_ids=[]
-    if os.path.isfile("/home/pi/playlist.json"):
-        with open('/home/pi/playlist.json','r') as input_file:
+    if os.path.isfile("/home/osmc/playlist.json"):
+        with open('/home/osmc/playlist.json','r') as input_file:
             playlistcontents= json.load(input_file)
     else:
         playlistcontents=api.get_all_user_playlist_contents()
-        with open('/home/pi/playlist.json', 'w') as output_file:
+        with open('/home/osmc/playlist.json', 'w') as output_file:
             json.dump(playlistcontents, output_file)
 ##        print(playlistcontents[0]['tracks'])
 
@@ -87,28 +87,28 @@ def loadplaylist(playlistnum):
 def refreshlists():
     playlistcontents=api.get_all_user_playlist_contents()
     songs_list= api.get_all_songs()
-    with open('/home/pi/songs.json', 'w') as output_file:
+    with open('/home/osmc/songs.json', 'w') as output_file:
         json.dump(songs_list, output_file)
-    with open('/home/pi/playlist.json', 'w') as output_file:
+    with open('/home/osmc/playlist.json', 'w') as output_file:
         json.dump(playlist_list, output_file)
 
 def play_playlist(playlistnum):
 
-    if os.path.isfile("/home/pi/.gmusicplaylistplayer.json"):
-        with open('/home/pi/.gmusicplaylistplayer.json','r') as input_file:
+    if os.path.isfile("/home/osmc/.gmusicplaylistplayer.json"):
+        with open('/home/osmc/.gmusicplaylistplayer.json','r') as input_file:
             playerinfo= json.load(input_file)
         currenttrackid=playerinfo[0]
         loopstatus=playerinfo[1]
         nexttrackid=currenttrackid+1
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicplaylistplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicplaylistplayer.json', 'w') as output_file:
             json.dump(playerinfo, output_file)
     else:
         currenttrackid=0
         nexttrackid=1
         loopstatus='on'
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicplaylistplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicplaylistplayer.json', 'w') as output_file:
             json.dump(playerinfo, output_file)
 
     tracks,numtracks=loadplaylist(playlistnum)
@@ -123,7 +123,7 @@ def play_playlist(playlistnum):
         nexttrackid=1
         loopstatus='on'
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicplaylistplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicplaylistplayer.json', 'w') as output_file:
             json.dump(playerinfo,output_file)
         streamurl=api.get_stream_url(tracks[currenttrackid])
         streamurl=("'"+streamurl+"'")
@@ -134,21 +134,21 @@ def play_playlist(playlistnum):
 
 def play_songs():
 
-    if os.path.isfile("/home/pi/.gmusicsongsplayer.json"):
-        with open('/home/pi/.gmusicsongsplayer.json','r') as input_file:
+    if os.path.isfile("/home/osmc/.gmusicsongsplayer.json"):
+        with open('/home/osmc/.gmusicsongsplayer.json','r') as input_file:
             playerinfo= json.load(input_file)
         currenttrackid=playerinfo[0]
         loopstatus=playerinfo[1]
         nexttrackid=currenttrackid+1
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicsongsplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicsongsplayer.json', 'w') as output_file:
             json.dump(playerinfo, output_file)
     else:
         currenttrackid=0
         nexttrackid=1
         loopstatus='on'
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicsongsplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicsongsplayer.json', 'w') as output_file:
             json.dump(playerinfo, output_file)
 
     tracks,numtracks=loadsonglist()
@@ -163,7 +163,7 @@ def play_songs():
         nexttrackid=1
         loopstatus='on'
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicsongsplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicsongsplayer.json', 'w') as output_file:
             json.dump(playerinfo,output_file)
         streamurl=api.get_stream_url(tracks[currenttrackid])
         streamurl=("'"+streamurl+"'")
@@ -173,21 +173,21 @@ def play_songs():
         print("Error")
 
 def play_album(albumname):
-    if os.path.isfile("/home/pi/.gmusicalbumplayer.json"):
-        with open('/home/pi/.gmusicalbumplayer.json','r') as input_file:
+    if os.path.isfile("/home/osmc/.gmusicalbumplayer.json"):
+        with open('/home/osmc/.gmusicalbumplayer.json','r') as input_file:
             playerinfo= json.load(input_file)
         currenttrackid=playerinfo[0]
         loopstatus=playerinfo[1]
         nexttrackid=currenttrackid+1
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicalbumplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicalbumplayer.json', 'w') as output_file:
             json.dump(playerinfo, output_file)
     else:
         currenttrackid=0
         nexttrackid=1
         loopstatus='on'
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicalbumplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicalbumplayer.json', 'w') as output_file:
             json.dump(playerinfo, output_file)
 
     tracks,numtracks=loadalbum(albumname)
@@ -202,7 +202,7 @@ def play_album(albumname):
         nexttrackid=1
         loopstatus='on'
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicalbumplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicalbumplayer.json', 'w') as output_file:
             json.dump(playerinfo,output_file)
         streamurl=api.get_stream_url(tracks[currenttrackid])
         streamurl=("'"+streamurl+"'")
@@ -213,21 +213,21 @@ def play_album(albumname):
 
 
 def play_artist(artistname):
-    if os.path.isfile("/home/pi/.gmusicartistplayer.json"):
-        with open('/home/pi/.gmusicartistplayer.json','r') as input_file:
+    if os.path.isfile("/home/osmc/.gmusicartistplayer.json"):
+        with open('/home/osmc/.gmusicartistplayer.json','r') as input_file:
             playerinfo= json.load(input_file)
         currenttrackid=playerinfo[0]
         loopstatus=playerinfo[1]
         nexttrackid=currenttrackid+1
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicartistplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicartistplayer.json', 'w') as output_file:
             json.dump(playerinfo, output_file)
     else:
         currenttrackid=0
         nexttrackid=1
         loopstatus='on'
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicartistplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicartistplayer.json', 'w') as output_file:
             json.dump(playerinfo, output_file)
 
     tracks,numtracks=loadartist(artistname)
@@ -242,7 +242,7 @@ def play_artist(artistname):
         nexttrackid=1
         loopstatus='on'
         playerinfo=[nexttrackid,loopstatus]
-        with open('/home/pi/.gmusicartistplayer.json', 'w') as output_file:
+        with open('/home/osmc/.gmusicartistplayer.json', 'w') as output_file:
             json.dump(playerinfo,output_file)
         streamurl=api.get_stream_url(tracks[currenttrackid])
         streamurl=("'"+streamurl+"'")

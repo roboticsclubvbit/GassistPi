@@ -65,42 +65,42 @@ AIY-HAT and CUSTOM-HAT users, please reboot the Pi at places mentioned, else it 
 
   3.1. USB DAC or USB Sound CARD users,  
   ```
-  sudo chmod +x /home/pi/GassistPi/audio-drivers/USB-DAC/scripts/install-usb-dac.sh  
-  sudo /home/pi/GassistPi/audio-drivers/USB-DAC/scripts/install-usb-dac.sh
+  sudo chmod +x /home/osmc/GassistPi/audio-drivers/USB-DAC/scripts/install-usb-dac.sh  
+  sudo /home/osmc/GassistPi/audio-drivers/USB-DAC/scripts/install-usb-dac.sh
   speaker-test  
   ```
 
   3.2. AIY-HAT users,  
   ```
-  sudo chmod +x /home/pi/GassistPi/audio-drivers/AIY-HAT/scripts/configure-driver.sh  
-  sudo /home/pi/GassistPi/audio-drivers/AIY-HAT/scripts/configure-driver.sh  
+  sudo chmod +x /home/osmc/GassistPi/audio-drivers/AIY-HAT/scripts/configure-driver.sh  
+  sudo /home/osmc/GassistPi/audio-drivers/AIY-HAT/scripts/configure-driver.sh  
   sudo reboot  
-  sudo chmod +x /home/pi/GassistPi/audio-drivers/AIY-HAT/scripts/install-alsa-config.sh  
-  sudo /home/pi/GassistPi/audio-drivers/AIY-HAT/scripts/install-alsa-config.sh  
+  sudo chmod +x /home/osmc/GassistPi/audio-drivers/AIY-HAT/scripts/install-alsa-config.sh  
+  sudo /home/osmc/GassistPi/audio-drivers/AIY-HAT/scripts/install-alsa-config.sh  
   speaker-test  
   ```
 
   3.3. USB MIC AND HDMI users,  
   ```
-  sudo chmod +x /home/pi/GassistPi/audio-drivers/USB-MIC-HDMI/scripts/install-usb-mic-hdmi.sh  
-  sudo /home/pi/GassistPi/audio-drivers/USB-MIC-HDMI/scripts/install-usb-mic-hdmi.sh  
+  sudo chmod +x /home/osmc/GassistPi/audio-drivers/USB-MIC-HDMI/scripts/install-usb-mic-hdmi.sh  
+  sudo /home/osmc/GassistPi/audio-drivers/USB-MIC-HDMI/scripts/install-usb-mic-hdmi.sh  
   speaker-test  
   ```
 
   3.4. USB MIC AND AUDIO JACK users,  
   ```
-  sudo chmod +x /home/pi/GassistPi/audio-drivers/USB-MIC-JACK/scripts/usb-mic-onboard-jack.sh  
-  sudo /home/pi/GassistPi/audio-drivers/USB-MIC-JACK/scripts/usb-mic-onboard-jack.sh  
+  sudo chmod +x /home/osmc/GassistPi/audio-drivers/USB-MIC-JACK/scripts/usb-mic-onboard-jack.sh  
+  sudo /home/osmc/GassistPi/audio-drivers/USB-MIC-JACK/scripts/usb-mic-onboard-jack.sh  
   speaker-test  
   ```
 
   3.5. CUSTOM VOICE HAT users,  
   ```
-  sudo chmod +x /home/pi/GassistPi/audio-drivers/CUSTOM-VOICE-HAT/scripts/install-i2s.sh  
-  sudo /home/pi/GassistPi/audio-drivers/CUSTOM-VOICE-HAT/scripts/install-i2s.sh
+  sudo chmod +x /home/osmc/GassistPi/audio-drivers/CUSTOM-VOICE-HAT/scripts/install-i2s.sh  
+  sudo /home/osmc/GassistPi/audio-drivers/CUSTOM-VOICE-HAT/scripts/install-i2s.sh
   sudo reboot
-  sudo chmod +x /home/pi/GassistPi/audio-drivers/CUSTOM-VOICE-HAT/scripts/custom-voice-hat.sh  
-  sudo /home/pi/GassistPi/audio-drivers/CUSTOM-VOICE-HAT/scripts/custom-voice-hat.sh  
+  sudo chmod +x /home/osmc/GassistPi/audio-drivers/CUSTOM-VOICE-HAT/scripts/custom-voice-hat.sh  
+  sudo /home/osmc/GassistPi/audio-drivers/CUSTOM-VOICE-HAT/scripts/custom-voice-hat.sh  
   speaker-test   
   ```
 
@@ -127,22 +127,22 @@ speaker-test -t wav
 
 1. Download credentials--->.json file (refer to this doc for creating credentials https://developers.google.com/assistant/sdk/develop/python/config-dev-project-and-account)   
 
-2. Place the .json file in/home/pi directory **DO NOT RENAME**  
+2. Place the .json file in/home/osmc directory **DO NOT RENAME**  
 
 3. Use the one-line installer for installing Google Assistant    
 **Pi3 and Armv7 users use the "gassist-installer-pi3.sh" installer and Pi Zero, Pi A and Pi 1 B+ users use the "gassist-installer-pi-zero.sh" installer.**  
 	4.1 Make the installers Executable  
 
 	```
-	sudo chmod +x /home/pi/GassistPi/scripts/gassist-installer-pi3.sh
-	sudo chmod +x /home/pi/GassistPi/scripts/gassist-installer-pi-zero.sh
+	sudo chmod +x /home/osmc/GassistPi/scripts/gassist-installer-pi3.sh
+	sudo chmod +x /home/osmc/GassistPi/scripts/gassist-installer-pi-zero.sh
 
 	```
 
 	4.2 Execute the installers **Pi3 and Armv7 users use the "gassist-installer-pi3.sh" installer and Pi Zero, Pi A and Pi 1 B+ users use the "gassist-installer-pi-zero.sh" installer. When Prompted, enter your Google Cloud console Project-Id, A name for your Assistant and the Full Name of your credentials file, including the json extension.**  
 	```
-	sudo  /home/pi/GassistPi/scripts/gassist-installer-pi3.sh  
-	sudo  /home/pi/GassistPi/scripts/gassist-installer-pi-zero.sh
+	sudo  /home/osmc/GassistPi/scripts/gassist-installer-pi3.sh  
+	sudo  /home/osmc/GassistPi/scripts/gassist-installer-pi-zero.sh
 
 	```
 
@@ -158,18 +158,18 @@ speaker-test -t wav
 *************************************************  
 ## **HEADLESS AUTOSTART on BOOT SERVICE SETUP**  
 *************************************************  
-1. Open the service files in the /home/pi/GassistPi/systemd/ directory and add your project and model ids in the indicated places and save the file.
+1. Open the service files in the /home/osmc/GassistPi/systemd/ directory and add your project and model ids in the indicated places and save the file.
 
 2. Make the service installer executable  
 
 ```
-sudo chmod +x /home/pi/GassistPi/scripts/service-installer.sh
+sudo chmod +x /home/osmc/GassistPi/scripts/service-installer.sh
 ```  
 
 3. Run the service installer  
 
 ```
-sudo /home/pi/GassistPi/scripts/service-installer.sh    
+sudo /home/osmc/GassistPi/scripts/service-installer.sh    
 ```  
 
 4. Enable the services - **Pi3 and Armv7 users, enable the "gassistpi-ok-ggogle.service" and Pi Zero, Pi A and Pi 1 B+ users, enable "gassistpi-push-button.service"**          

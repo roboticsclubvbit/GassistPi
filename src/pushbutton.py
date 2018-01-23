@@ -151,12 +151,12 @@ class SampleAssistant(object):
         """
         continue_conversation = False
         device_actions_futures = []
-        subprocess.Popen(["aplay", "/home/pi/GassistPi/sample-audio-files/Fb.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        subprocess.Popen(["aplay", "/home/osmc/GassistPi/sample-audio-files/Fb.wav"], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
         self.conversation_stream.start_recording()
         #Uncomment the following after starting the Kodi
         #status=mutevolstatus()
         #vollevel=status[1]
-        #with open('/home/pi/.volume.json', 'w') as f:
+        #with open('/home/osmc/.volume.json', 'w') as f:
                #json.dump(vollevel, f)
         #kodi.Application.SetVolume({"volume": 0})
         GPIO.output(5,GPIO.HIGH)
@@ -264,7 +264,7 @@ class SampleAssistant(object):
         GPIO.output(5,GPIO.LOW)
         led.ChangeDutyCycle(0)
         #Uncomment the following, after starting Kodi
-        #with open('/home/pi/.volume.json', 'r') as f:
+        #with open('/home/osmc/.volume.json', 'r') as f:
                #vollevel = json.load(f)
                #kodi.Application.SetVolume({"volume": vollevel})
         self.conversation_stream.stop_playback()
